@@ -2,6 +2,9 @@ package com.vardhan.customer;
 
 import com.vardhan.clients.fraud.FraudCheckResponse;
 import com.vardhan.clients.fraud.FraudClient;
+import com.vardhan.clients.notification.NotificationClient;
+import com.vardhan.clients.notification.NotificationRequest;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final NotificationClient notificationClient;
     private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
 
@@ -30,6 +34,14 @@ public class CustomerService {
             throw new IllegalStateException(String.format("The customer with id: %s is fraudster", customer.getId()));
         }
 
-        // TODO: send notification
+        // todo: make it async. i.e add to queue
+        notificationClient.sendNotification(
+                new NotificationRequest(
+                        customer.getId(),
+                        customer.getEmail(),
+                        String.format("Hi %s, welcome to Govardhan's repository...",
+                                customer.getFirstName())
+                )
+        );
     }
 }
