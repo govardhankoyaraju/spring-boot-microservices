@@ -15,6 +15,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final NotificationClient notificationClient;
+    private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
 
     public void registerCustomer(CustomerRegistrationRequest registrationRequest) {
