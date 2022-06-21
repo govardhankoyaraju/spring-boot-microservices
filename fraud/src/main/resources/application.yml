@@ -1,0 +1,18 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: Fraud
+  datasource:
+    username: govardhan
+    password: password
+    url: jdbc:postgresql://localhost:5432/fraud
+  jpa:
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
