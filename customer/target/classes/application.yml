@@ -3,4 +3,24 @@ server:
 
 spring:
   application:
-    name: Customer
+    name: customer
+  datasource:
+    username: govardhan
+    password: password
+    url: jdbc:postgresql://localhost:5432/customer
+  jpa:
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: true
+    hibernate:
+        ddl-auto: create-drop
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
